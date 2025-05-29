@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 
+const userAPIRoutes = require("./api/userRoutes");
+
+app.use("/api/users", userAPIRoutes);
+
 app.use(express.static("public"));
 
 app.locals.siteTitle = "My Website";
