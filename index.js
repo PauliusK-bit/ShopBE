@@ -9,6 +9,7 @@ const cors = require("cors");
 
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 
@@ -18,9 +19,15 @@ app.use(express.json());
 
 app.use(
   session({
-    secret: process.env.JWT_SECRET,
+    secret: process.env.JWT_SECRET || "testing",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URI,
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   })
 );
 
