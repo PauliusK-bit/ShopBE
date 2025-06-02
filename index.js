@@ -7,38 +7,19 @@ require("./db");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 
-app.use(
-  session({
-    secret: process.env.JWT_SECRET || "testing",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.DB_URI,
-    }),
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24,
-    },
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 const userAPIRoutes = require("./api/userRoutes");
-const authRoutes = require("./api/oAuth");
+const categoriesAPIRoutes = require("./api/categoryRoutes");
+const itemsAPIRoutes = require("./api/itemRoutes");
 
 app.use("/api/users", userAPIRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/api/categories", categoriesAPIRoutes);
+app.use("/api/items", itemsAPIRoutes);
 
 app.use(express.static("public"));
 
