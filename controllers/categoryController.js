@@ -1,4 +1,5 @@
 const Category = require("../models/categoryModel");
+const Item = require("../models/itemModel");
 
 const createCategory = async (req, res) => {
   try {
@@ -74,10 +75,24 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+const getItemsByCategory = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+
+    const items = await Item.find({ categoryId });
+
+    res.send(items);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   getCategories,
   getCategoryById,
   createCategory,
   updateCategory,
   deleteCategory,
+  getItemsByCategory,
 };
