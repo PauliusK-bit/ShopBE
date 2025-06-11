@@ -16,12 +16,12 @@ app.use(express.json());
 const userAPIRoutes = require("./api/userRoutes");
 const categoriesAPIRoutes = require("./api/categoryRoutes");
 const itemsAPIRoutes = require("./api/itemRoutes");
-// const orderAPIRoutes = require("./api/orderRoutes");
+const orderAPIRoutes = require("./api/orderRoutes");
 
 app.use("/api/users", userAPIRoutes);
 app.use("/api/categories", categoriesAPIRoutes);
 app.use("/api/items", itemsAPIRoutes);
-// app.use("/api/order", orderAPIRoutes);
+app.use("/api/order", orderAPIRoutes);
 
 app.use(express.static("public"));
 

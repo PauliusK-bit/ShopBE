@@ -1,8 +1,8 @@
-// const express = require("express");
-// const { getCheckout } = require("../controllers/orderController");
+const express = require("express");
+const { getCheckout } = require("../controllers/orderController");
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get("/checkout/:itemId", getCheckout);
+router.post("/checkout", getCheckout);
 
-// module.exports = router;
+module.exports = router;
