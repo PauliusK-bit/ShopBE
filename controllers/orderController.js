@@ -69,6 +69,10 @@ const getCheckout = async (req, res) => {
       automatic_payment_methods: {
         enabled: true,
       },
+      metadata: {
+        order_id: generateOrderId(),
+        item_count: items.length,
+      },
     });
     res.status(200).send({
       clientSecret: paymentIntent.client_secret,
